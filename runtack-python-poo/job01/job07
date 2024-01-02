@@ -1,0 +1,67 @@
+class Personnage:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def afficher_position(self):
+        print(f"Position du personnage : ({self.x}, {self.y})")
+
+    def gauche(self):
+        self.x -= 1
+
+    def droite(self):
+        self.x += 1
+
+    def haut(self):
+        self.y -= 1
+
+    def bas(self):
+        self.y += 1
+
+    def position(self):
+        return (self.x, self.y)
+
+
+class Jeu:
+    def __init__(self, taille_plateau):
+        self.taille_plateau = taille_plateau
+        self.plateau = [[0] * taille_plateau for _ in range(taille_plateau)]
+        self.mon_personnage = Personnage(0.4, 0.5)
+
+    def afficher_plateau(self):
+        for ligne in self.plateau:
+            print(ligne)
+
+    def deplacer_personnage(self, nouvelle_x, nouvelle_y):
+        if 0 <= nouvelle_x < self.taille_plateau and 0 <= nouvelle_y < self.taille_plateau:
+            self.mon_personnage.x, self.mon_personnage.y = nouvelle_x, nouvelle_y
+            self.plateau[nouvelle_x][nouvelle_y] = 1
+            self.afficher_plateau()
+            self.mon_personnage.afficher_position()
+        else:
+            print("Déplacement en dehors des limites du plateau.")
+
+
+# Exemple d'utilisation
+taille_plateau_jeu = 5
+jeu = Jeu(taille_plateau_jeu)
+
+# Afficher la position initiale du personnage
+jeu.mon_personnage.afficher_position()
+
+# Déplacement vers la gauche
+jeu.mon_personnage.gauche()
+print("Position après déplacement gauche:", jeu.mon_personnage.position())
+
+# Déplacement vers la droite
+jeu.mon_personnage.droite()
+print("Position après déplacement droite:", jeu.mon_personnage.position())
+
+# Déplacement vers le haut
+jeu.mon_personnage.haut()
+print("Position après déplacement haut:", jeu.mon_personnage.position())
+
+# Déplacement vers le bas
+jeu.mon_personnage.bas()
+print("Position après déplacement bas:", jeu.mon_personnage.position())
+
